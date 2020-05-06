@@ -10,6 +10,8 @@ function Navigation() {
 
   return(
     <nav>
+      <h1>MicroBlog</h1>
+      <h6>Innovative One Of A Kind Blog Application</h6>
       <NavLink to="/">Blog</NavLink>
       <NavLink to="/new">Add a New Post</NavLink>
     </nav>

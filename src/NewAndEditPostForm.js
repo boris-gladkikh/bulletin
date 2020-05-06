@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * TODO: FINISH ONSUBMIT FUNCTION
@@ -8,20 +9,27 @@ import { useHistory} from "react-router-dom";
  * Submiting or canceling redirects user home.
  */
 
-function NewAndEditPostForm() {
-  const INITIAL_DATA = {title: "", description: "", body: ""};
+function NewAndEditPostForm({ addPostToState }) {
+  const INITIAL_DATA = { title: "", description: "", body: "" };
   const [postFormData, setPostFormData] = useState(INITIAL_DATA);
   const history = useHistory();
 
-  function onSubmit(evt) {
-    evt.preventDefault();
-    //TBD
 
-    redirectUpdateHistory()
+
+
+  function onSubmit(evt) {
+    let completeData = {
+      ...postFormData,
+      id: uuidv4()
+    }
+    evt.preventDefault();
+    addPostToState(completeData);
+    setPostFormData(INITIAL_DATA);
+    redirectUpdateHistory();
   }
 
   function onChange(evt) {
-    const {name, value} = evt.target;
+    const { name, value } = evt.target;
     setPostFormData(currentData => (
       {
         ...currentData,
@@ -36,7 +44,7 @@ function NewAndEditPostForm() {
 
   let { title, description, body } = postFormData;
 
-  return(
+  return (
     <form onSubmit={onSubmit}>
       <label htmlFor="title"></label>
       <input
@@ -46,7 +54,7 @@ function NewAndEditPostForm() {
         value={title}
         placeholder="title"
         onChange={onChange}>
-      </input>
+      </input><br />
       <label htmlFor="description"></label>
       <input
         id="description"
@@ -55,7 +63,7 @@ function NewAndEditPostForm() {
         value={description}
         placeholder="description"
         onChange={onChange}>
-      </input>
+      </input><br />
       <label htmlFor="body"></label>
       <textarea
         id="body"
@@ -63,7 +71,7 @@ function NewAndEditPostForm() {
         value={body}
         placeholder="body"
         onChange={onChange}>
-      </textarea>
+      </textarea><br />
       <button id="save">Save</button>
       <button
         type="button"
