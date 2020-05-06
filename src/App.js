@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Navigation from "./Navigation";
@@ -15,12 +15,25 @@ import NewAndEditPostForm from "./NewAndEditPostForm";
 function App() {
   const [posts, setPosts] = useState([]);
 
-  function addPostToState(data){
-    setPosts((posts)=>(
-      [...posts, {...data}]
+  //adds a post to our posts state, to appear on our post list.
+
+  function addPostToState(data) {
+    setPosts((posts) => (
+      [...posts, { ...data }]
     ));
   }
-  console.log("this is posts in App", posts)
+
+  //edits post in state, replacing the post with updated information
+  function editPostInState(data) {
+    //filter existing state
+    //find post we are editing by id,
+    //replace post with autofilled data + newly added data
+  }
+
+  //delete post from state
+  function deletePostFromState(id) {
+    //filter existing state, excluding post with passed-in ID
+  }
 
 
   return (
@@ -28,14 +41,17 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <Switch>
-          <Route exact path= "/posts">
+          <Route exact path="/posts">
             <PostList posts={posts} />
           </Route>
-          <Route exact path= "/posts/:id">
-            <PostDetail posts={posts}/>
+          <Route exact path="/posts/:id">
+            <PostDetail
+              deletePostFromState={deletePostFromState}
+              posts={posts}
+              editPostInState={editPostInState} />
           </Route>
-          <Route exact path= "/new">
-            <NewAndEditPostForm addPostToState={addPostToState}/>
+          <Route exact path="/new">
+            <NewAndEditPostForm addPostToState={addPostToState} />
           </Route>
           <Route exact path="/">
             <Home posts={posts} />

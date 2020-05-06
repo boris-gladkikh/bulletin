@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
  * Submiting or canceling redirects user home.
  */
 
-function NewAndEditPostForm({ addPostToState }) {
+function NewAndEditPostForm({ addPostToState, editId, editTitle, editBody, editDescription }) {
   const INITIAL_DATA = { title: "", description: "", body: "" };
   const [postFormData, setPostFormData] = useState(INITIAL_DATA);
   const history = useHistory();
@@ -18,6 +18,10 @@ function NewAndEditPostForm({ addPostToState }) {
 
 
   function onSubmit(evt) {
+    if(editId !== undefined){
+      console.log("NOT YET")
+
+    } else {
     let completeData = {
       ...postFormData,
       id: uuidv4()
@@ -26,6 +30,7 @@ function NewAndEditPostForm({ addPostToState }) {
     addPostToState(completeData);
     setPostFormData(INITIAL_DATA);
     redirectUpdateHistory();
+  }
   }
 
   function onChange(evt) {
@@ -42,6 +47,7 @@ function NewAndEditPostForm({ addPostToState }) {
     history.push("/");
   }
 
+
   let { title, description, body } = postFormData;
 
   //two routes, one to "new", one to "edit"
@@ -49,8 +55,8 @@ function NewAndEditPostForm({ addPostToState }) {
 
   return (
     <div>
-      <h2>Add New Post!</h2>
-      <h2>Edit Post!</h2>
+     {editId !== undefined ?  <h2>Edit Post!</h2>: <h2>Add New Post!</h2>}
+     
     <form onSubmit={onSubmit}>
       <label htmlFor="title"></label>
       <input
