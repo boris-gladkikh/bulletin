@@ -1,9 +1,13 @@
 import React from "react";
 
-function Comment({ id, text }) {
+function Comment({ id, text, deleteComment }) {
+
+  // function handleClick(){
+  //   deleteComment(id)
+  // }
   return(
     <li id={id}>{text}
-      <button>X</button>
+      <button onClick={()=>deleteComment(id)}>X</button>
     </li>
   );
 }

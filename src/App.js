@@ -32,7 +32,7 @@ function App() {
   function editPostInState(data) {
     let removedPost = posts.filter(p => p.id !== data.id);
     setPosts(posts => (
-      [...removedPost, {...data}]
+      [...removedPost, { ...data }]
     ));
   }
 
@@ -41,6 +41,22 @@ function App() {
     setPosts(posts => (
       posts.filter(p => p.id !== id)
     ));
+  }
+
+  function addCommentToState(postId, commentData) {
+    //filter post, then add comment data to comment key array in post
+    let currentPostArray = posts.filter(p => p.id === postId);
+    let currentPost = currentPostArray[0];
+
+    //TODO: set the actual comment state 
+ 
+
+
+
+  }
+
+  function removeCommentFromState(postId, commentId) {
+    //filter post by id, then filter comment OUT by id
   }
 
 
@@ -54,6 +70,8 @@ function App() {
           </Route>
           <Route exact path="/posts/:id">
             <PostDetail
+              addComment={addCommentToState}
+              deleteComment={removeCommentFromState}
               deletePostFromState={deletePostFromState}
               posts={posts}
               editPostInState={editPostInState} />

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import NewAndEditPostForm from "./NewAndEditPostForm";
 import Comment from "./Comment";
+import CommentForm from "./CommentForm";
 
-function PostDetail({ posts, deletePostFromState, editPostInState }) {
+function PostDetail({ posts, deletePostFromState, editPostInState, addComment, deleteComment }) {
   const [editForm, setEditForm] = useState(false)
   const history = useHistory()
 
@@ -14,6 +15,7 @@ function PostDetail({ posts, deletePostFromState, editPostInState }) {
   let postComments = post.comments.map(c => (
     <ul>
       <Comment
+        deleteComment={deleteComment}
         key={c.id}
         id={c.id}
         text={c.text} />
@@ -30,6 +32,7 @@ function PostDetail({ posts, deletePostFromState, editPostInState }) {
 
   }
 
+  
   return (
     <div>
       <h1>{post.title}</h1>
@@ -46,6 +49,7 @@ function PostDetail({ posts, deletePostFromState, editPostInState }) {
         /> : ""}
       <h2>Comments</h2>
       {postComments}
+      <CommentForm postId = {id} addComment={addComment} deleteComment={deleteComment} />
     </div>
   )
 }
