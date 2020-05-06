@@ -44,7 +44,13 @@ function NewAndEditPostForm({ addPostToState }) {
 
   let { title, description, body } = postFormData;
 
+  //two routes, one to "new", one to "edit"
+  //both routes get same form component, pass either new or edit into a prop
+
   return (
+    <div>
+      <h2>Add New Post!</h2>
+      <h2>Edit Post!</h2>
     <form onSubmit={onSubmit}>
       <label htmlFor="title"></label>
       <input
@@ -79,6 +85,7 @@ function NewAndEditPostForm({ addPostToState }) {
         id="cancel">
         Cancel</button>
     </form>
+    </div>
   );
 }
 
