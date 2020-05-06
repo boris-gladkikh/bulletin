@@ -9,7 +9,12 @@ import NewAndEditPostForm from "./NewAndEditPostForm";
 
 
 /**
- * TBD
+ * State
+ * -- posts:
+ * [{id: id, title: title,
+ *   descrip :descrip,
+ *   body: body,
+ *   comments: [{id:id, text: text}, {...}, {...}}...]
  */
 
 function App() {
@@ -25,14 +30,17 @@ function App() {
 
   //edits post in state, replacing the post with updated information
   function editPostInState(data) {
-    //filter existing state
-    //find post we are editing by id,
-    //replace post with autofilled data + newly added data
+    let removedPost = posts.filter(p => p.id !== data.id);
+    setPosts(posts => (
+      [...removedPost, {...data}]
+    ));
   }
 
   //delete post from state
   function deletePostFromState(id) {
-    //filter existing state, excluding post with passed-in ID
+    setPosts(posts => (
+      posts.filter(p => p.id !== id)
+    ));
   }
 
 

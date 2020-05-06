@@ -3,7 +3,6 @@ import PostCard from "./PostCard";
 
 
 function PostList({posts}) {
-
   if(posts.length === 0){
     return (
       <div>
@@ -11,7 +10,7 @@ function PostList({posts}) {
       </div>
     )
   } else {
- 
+
   return (
     <div>
     {posts.map(p=>(

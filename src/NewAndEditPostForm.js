@@ -3,34 +3,33 @@ import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 /**
- * TODO: FINISH ONSUBMIT FUNCTION
- *
  * Renders a form for user to add new post or edit existing post.
  * Submiting or canceling redirects user home.
  */
 
-function NewAndEditPostForm({ addPostToState, editId, editTitle, editBody, editDescription }) {
-  const INITIAL_DATA = { title: "", description: "", body: "" };
-  const [postFormData, setPostFormData] = useState(INITIAL_DATA);
+function NewAndEditPostForm({ addPostToState, editPostInState, editId, editTitle, editBody, editDescription }) {
+  const postToEdit = {title: editTitle, description: editDescription, body: editBody};
+  const BLANK_FORM = { title: "", description: "", body: "" };
+  let prefillForm = (editId === undefined) ? BLANK_FORM : postToEdit
+
+  const [postFormData, setPostFormData] = useState(prefillForm);
   const history = useHistory();
 
 
-
-
   function onSubmit(evt) {
-    if(editId !== undefined){
-      console.log("NOT YET")
+    evt.preventDefault();
+    var completeData = (editId === undefined)
+      ? { ...postFormData, id: uuidv4(), comments:[]}
+      : { ...postFormData, id: editId }
+
+    if (editId !== undefined) {
+      editPostInState(completeData);
 
     } else {
-    let completeData = {
-      ...postFormData,
-      id: uuidv4()
+      addPostToState(completeData);
     }
-    evt.preventDefault();
-    addPostToState(completeData);
-    setPostFormData(INITIAL_DATA);
+    setPostFormData(BLANK_FORM);
     redirectUpdateHistory();
-  }
   }
 
   function onChange(evt) {
@@ -55,42 +54,42 @@ function NewAndEditPostForm({ addPostToState, editId, editTitle, editBody, editD
 
   return (
     <div>
-     {editId !== undefined ?  <h2>Edit Post!</h2>: <h2>Add New Post!</h2>}
-     
-    <form onSubmit={onSubmit}>
-      <label htmlFor="title"></label>
-      <input
-        id="title"
-        name="title"
-        type="text"
-        value={title}
-        placeholder="title"
-        onChange={onChange}>
-      </input><br />
-      <label htmlFor="description"></label>
-      <input
-        id="description"
-        name="description"
-        type="text"
-        value={description}
-        placeholder="description"
-        onChange={onChange}>
-      </input><br />
-      <label htmlFor="body"></label>
-      <textarea
-        id="body"
-        name="body"
-        value={body}
-        placeholder="body"
-        onChange={onChange}>
-      </textarea><br />
-      <button id="save">Save</button>
-      <button
-        type="button"
-        onClick={redirectUpdateHistory}
-        id="cancel">
-        Cancel</button>
-    </form>
+      {editId !== undefined ? <h2>Edit Post!</h2> : <h2>Add New Post!</h2>}
+
+      <form onSubmit={onSubmit}>
+        <label htmlFor="title"></label>
+        <input
+          id="title"
+          name="title"
+          type="text"
+          value={title}
+          placeholder="title"
+          onChange={onChange}>
+        </input><br />
+        <label htmlFor="description"></label>
+        <input
+          id="description"
+          name="description"
+          type="text"
+          value={description}
+          placeholder="description"
+          onChange={onChange}>
+        </input><br />
+        <label htmlFor="body"></label>
+        <textarea
+          id="body"
+          name="body"
+          value={body}
+          placeholder="body"
+          onChange={onChange}>
+        </textarea><br />
+        <button id="save">Save</button>
+        <button
+          type="button"
+          onClick={redirectUpdateHistory}
+          id="cancel">
+          Cancel</button>
+      </form>
     </div>
   );
 }
