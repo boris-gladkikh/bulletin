@@ -8,7 +8,6 @@ import React from "react";
 function PostDetail({ post }) {
   return (
     <div>
-      "post detail under construction "
       <h1>{post.title}</h1>
       <h3>{post.description}</h3>
       <p>{post.body}</p>

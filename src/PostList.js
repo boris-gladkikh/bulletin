@@ -3,7 +3,6 @@ import PostCard from "./PostCard";
 import {useSelector, shallowEqual} from "react-redux";
 
 
-//renders list of all available posts with post card child components
 
 // post:
 // {{title: "", depostId: scription:"", body""}}
@@ -11,6 +10,8 @@ import {useSelector, shallowEqual} from "react-redux";
 // comments:
 //  {postId: [{commentId: commentId, text: text}]}
 
+
+//renders list of all available posts with post card child components
 
 function PostList() {
 

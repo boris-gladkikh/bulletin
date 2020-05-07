@@ -4,9 +4,15 @@ import React from "react";
 
 function Comment({ postId, commentId, text, deleteComment }) {
 
+
+  function handleDelete(){
+    deleteComment(postId, commentId)
+  }
+
+
   return(
     <li id={commentId}>{text}
-      <button onClick={()=>deleteComment(postId, commentId)}>X</button>
+      <button onClick={handleDelete}>X</button>
     </li>
   );
 }

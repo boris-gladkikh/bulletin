@@ -8,12 +8,12 @@ function CommentForm({ addComment, postId }) {
   const [commentFormData, setCommentFormData] = useState({ ...BLANK_FORM });
 
 
-// adds id to commentForm data and  adds comment to state
+// adds id to commentForm data and  adds comment to store
 
   function handleSubmit(evt) {
     evt.preventDefault();
     let completeComment = { ...commentFormData, commentId: uuidv4() }
-    // add comment to posts state
+    // add comment to store
     addComment(postId, completeComment)
 
     //reset form data to blank form
@@ -30,7 +30,7 @@ function CommentForm({ addComment, postId }) {
 
   return (
     <div>
-      <h2>Add A Comment!</h2>
+      <h6>Add A Comment!</h6>
       <form onSubmit={handleSubmit}>
         <label htmlFor="comment"></label>
         <input
@@ -39,7 +39,7 @@ function CommentForm({ addComment, postId }) {
           type="text"
           onChange={handleChange}
           value={commentFormData.text} />
-        <button>Add Comment</button>
+        <button>Add</button>
       </form>
     </div>
 
