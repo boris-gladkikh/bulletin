@@ -1,5 +1,7 @@
 import React from "react";
 
+//renders individual comment card, with  delete comment functionality
+
 function Comment({ postId, commentId, text, deleteComment }) {
 
   return(

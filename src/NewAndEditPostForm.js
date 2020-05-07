@@ -7,26 +7,28 @@ import { v4 as uuidv4 } from "uuid";
  * Submiting or canceling redirects user home.
  */
 
-function NewAndEditPostForm({ addPostToState, editPostInState, editId, editTitle, editBody, editDescription }) {
-  const postToEdit = {title: editTitle, description: editDescription, body: editBody};
+function NewAndEditPostForm({ addPost, editPost, editId, post }) {
   const BLANK_FORM = { title: "", description: "", body: "" };
-  let prefillForm = (editId === undefined) ? BLANK_FORM : postToEdit
+  let prefillForm = (editId === undefined) ? BLANK_FORM : post
 
   const [postFormData, setPostFormData] = useState(prefillForm);
   const history = useHistory();
 
+//determines wether we are adding or editing a post, then executes appropriate function based on existence of edit data.
 
   function onSubmit(evt) {
     evt.preventDefault();
-    var completeData = (editId === undefined)
-      ? { ...postFormData, id: uuidv4() }
-      : { ...postFormData, id: editId }
+    var newId = uuidv4();
+ 
 
     if (editId !== undefined) {
-      editPostInState(completeData);
+      console.log("this is our action.postId in our edit Form", editId)
+
+      editPost(editId, postFormData);
+      
 
     } else {
-      addPostToState(completeData);
+      addPost(newId, postFormData);
     }
     setPostFormData(BLANK_FORM);
     redirectUpdateHistory();
@@ -49,12 +51,10 @@ function NewAndEditPostForm({ addPostToState, editPostInState, editId, editTitle
 
   let { title, description, body } = postFormData;
 
-  //two routes, one to "new", one to "edit"
-  //both routes get same form component, pass either new or edit into a prop
+ 
 
   return (
     <div>
-      {editId !== undefined ? <h2>Edit Post!</h2> : <h2>Add New Post!</h2>}
 
       <form onSubmit={onSubmit}>
         <label htmlFor="title"></label>

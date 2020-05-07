@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+//renders comment form child in post details, allowing addition of comment on specific post
+
 function CommentForm({ addComment, postId }) {
   const BLANK_FORM = { text: "" }
   const [commentFormData, setCommentFormData] = useState({ ...BLANK_FORM });
 
 
+// adds id to commentForm data and  adds comment to state
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -18,6 +21,8 @@ function CommentForm({ addComment, postId }) {
 
 
   }
+
+
 
   function handleChange(evt) {
     setCommentFormData({ text: evt.target.value });
