@@ -4,35 +4,75 @@ import NewAndEditPostForm from "./NewAndEditPostForm";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
-function PostDetail({ posts, deletePostFromState, editPostInState, addComment, deleteComment }) {
+/**
+ * comments state {postId: [{commentId: commentId, text: text}]}
+ */
+
+function PostDetail({ posts, deletePostFromState, editPostInState }) {
   const [editForm, setEditForm] = useState(false)
+  const [comments, setComments] = useState({})
   const history = useHistory()
 
   let { id } = useParams();
   let postArray = posts.filter(p => p.id === id);
   let post = postArray[0];
 
-  let postComments = post.comments.map(c => (
-    <ul>
-      <Comment
-        deleteComment={deleteComment}
-        key={c.id}
-        id={c.id}
-        text={c.text} />
-    </ul>
-  ))
+
 
   function editPost() {
     setEditForm(true);
   }
 
   function deletePost() {
-  deletePostFromState(id);
-  history.push("/");
+    deletePostFromState(id);
+    history.push("/");
 
   }
 
-  
+
+  function addComment(postId, commentData) {
+    if (comments[postId] !== undefined) {
+
+      setComments(oldComments => (
+        {
+          ...oldComments,
+          [postId]: [...oldComments[postId], { ...commentData }]
+        }
+      ))
+    } else {
+
+      setComments(oldComments => (
+        {
+          ...oldComments,
+          [postId]: [{...commentData}]
+        }
+      ))
+    }
+  }
+
+
+  function deleteComment(postId, commentId) {
+    let filterComments = comments[postId].filter(c => c.commentId !== commentId);
+    setComments(oldComments => (
+      {
+        ...oldComments,
+        [postId]: [...filterComments]
+      }
+    ))
+  }
+
+  let displayComments = (comments[id] !== undefined)
+    ? comments[id].map(c => (
+      <ul>
+        <Comment
+          deleteComment={deleteComment}
+          key={c.commentId}
+          commentId={c.commentId}
+          postId={id}
+          text={c.text} />
+      </ul>))
+    : <p>No Comments Yet</p>
+
   return (
     <div>
       <h1>{post.title}</h1>
@@ -46,10 +86,11 @@ function PostDetail({ posts, deletePostFromState, editPostInState, addComment, d
         editTitle={post.title}
         editDescription={post.description}
         editBody={post.body}
-        /> : ""}
+      /> : ""}
+
       <h2>Comments</h2>
-      {postComments}
-      <CommentForm postId = {id} addComment={addComment} deleteComment={deleteComment} />
+      {displayComments}
+      <CommentForm postId={id} addComment={addComment} deleteComment={deleteComment} />
     </div>
   )
 }

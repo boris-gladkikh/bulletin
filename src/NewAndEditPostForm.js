@@ -19,7 +19,7 @@ function NewAndEditPostForm({ addPostToState, editPostInState, editId, editTitle
   function onSubmit(evt) {
     evt.preventDefault();
     var completeData = (editId === undefined)
-      ? { ...postFormData, id: uuidv4(), comments:[]}
+      ? { ...postFormData, id: uuidv4() }
       : { ...postFormData, id: editId }
 
     if (editId !== undefined) {

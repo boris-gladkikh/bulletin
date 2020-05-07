@@ -13,8 +13,7 @@ import NewAndEditPostForm from "./NewAndEditPostForm";
  * -- posts:
  * [{id: id, title: title,
  *   descrip :descrip,
- *   body: body,
- *   comments: [{id:id, text: text}, {...}, {...}}...]
+ *   body: body}]
  */
 
 function App() {
@@ -43,22 +42,6 @@ function App() {
     ));
   }
 
-  function addCommentToState(postId, commentData) {
-    //filter post, then add comment data to comment key array in post
-    let currentPostArray = posts.filter(p => p.id === postId);
-    let currentPost = currentPostArray[0];
-
-    //TODO: set the actual comment state 
- 
-
-
-
-  }
-
-  function removeCommentFromState(postId, commentId) {
-    //filter post by id, then filter comment OUT by id
-  }
-
 
   return (
     <div className="MicroBlog-App">
@@ -70,8 +53,6 @@ function App() {
           </Route>
           <Route exact path="/posts/:id">
             <PostDetail
-              addComment={addCommentToState}
-              deleteComment={removeCommentFromState}
               deletePostFromState={deletePostFromState}
               posts={posts}
               editPostInState={editPostInState} />

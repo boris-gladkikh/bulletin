@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-function CommentForm({addComment, postId}) {
+function CommentForm({ addComment, postId }) {
   const BLANK_FORM = { text: "" }
   const [commentFormData, setCommentFormData] = useState({ ...BLANK_FORM });
 
@@ -9,9 +9,9 @@ function CommentForm({addComment, postId}) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    let completeComment = { ...commentFormData, id: uuidv4() }
-    // add comment to posts state 
-    addComment(postId,completeComment)
+    let completeComment = { ...commentFormData, commentId: uuidv4() }
+    // add comment to posts state
+    addComment(postId, completeComment)
 
     //reset form data to blank form
     setCommentFormData(BLANK_FORM);
@@ -20,13 +20,9 @@ function CommentForm({addComment, postId}) {
   }
 
   function handleChange(evt) {
-    let { name, value } = evt.target;
-    setCommentFormData((data) => ({
-      ...data,
-      [name]: value
-    }))
-
+    setCommentFormData({ text: evt.target.value });
   }
+
   return (
     <div>
       <h2>Add A Comment!</h2>
@@ -45,4 +41,4 @@ function CommentForm({addComment, postId}) {
   )
 }
 
-export default CommentForm 
+export default CommentForm
