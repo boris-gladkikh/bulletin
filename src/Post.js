@@ -17,21 +17,20 @@ function Post() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  //VARS FOR NOW DON'T BE MAD
-  var { postId } = useParams();
-  var post = useSelector(st => st.posts[postId]);
+  const { postId } = useParams();
+  let post = useSelector(st => st.posts[postId]);
   const comments = useSelector(st => st.comments[postId]) || [];
 
+  console.log("this is post inside post outside useEffect \n\n", post)
 
   //thunk API call to backend to retrieve post detail
-  useEffect(function fetchPostDetail(postId, post) {
-    console.log("this is postId inside post inside useEffect \n\n", postId)
+  useEffect(function fetchPostDetail() {
     if (post === undefined && postId !== undefined) {
       dispatch(getPostDetailFromAPI(postId))
+      console.log("this is post inside post inside useEffect after dispatch \n\n", post)
     }
-  }, [dispatch, postId])
+  }, [dispatch, postId, post])
 
-    console.log("this is postId inside post outside useEffect \n\n", postId)
 
 
   //function to toggle visibility of edit form on button click
@@ -88,7 +87,6 @@ function Post() {
     )
 
   } else {
-    console.log("this is post inside else statemtn in POST", post)
 
     return (
       <div>
