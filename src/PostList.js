@@ -4,9 +4,9 @@ import {useSelector, shallowEqual} from "react-redux";
 
 
 
+//data structure of store:
 // post:
-// {{title: "", depostId: scription:"", body""}}
-
+// {postId: {postId:"", title: "", description:"", body""}} <--------- TODO: include ID in reducer state value as well
 // comments:
 //  {postId: [{commentId: commentId, text: text}]}
 
@@ -17,7 +17,8 @@ function PostList() {
 
 
   //since it is a nested object data structure, how do we compare equality on the nested objects? 
-  const posts = useSelector((st)=> st.posts, shallowEqual);
+  
+  const posts =Object.values(useSelector((st)=> st.posts, shallowEqual));
   let postIds = Object.keys(posts)
 
 
@@ -32,7 +33,10 @@ function PostList() {
 
   return (
     <div>
-    {Object.values(posts).map((p,idx)=>(
+    {/* {posts.map(({title,description,postId})=>(
+      <PostCard title={title} description={description} id={postId} key={postId} />
+    ))} */}
+    {posts.map((p,idx)=>(
       <PostCard title={p.title} description={p.description} id={postIds[idx]} key={postIds[idx]} />
     ))}
 

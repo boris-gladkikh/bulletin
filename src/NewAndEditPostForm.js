@@ -26,7 +26,6 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
 
       editPost(editId, postFormData);
       
-
     } else {
       addPost(newId, postFormData);
     }
@@ -51,7 +50,6 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
 
   let { title, description, body } = postFormData;
 
- 
 
   return (
     <div>
@@ -66,6 +64,7 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
           placeholder="title"
           onChange={onChange}>
         </input><br />
+
         <label htmlFor="description"></label>
         <input
           id="description"
@@ -75,6 +74,7 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
           placeholder="description"
           onChange={onChange}>
         </input><br />
+
         <label htmlFor="body"></label>
         <textarea
           id="body"

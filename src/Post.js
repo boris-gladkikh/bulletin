@@ -9,6 +9,7 @@ import { removePost, editPost, addComment, deleteComment } from "./actionCreator
 
 
 //renders parent 'Post' which has the comment children components as well as the edit form component
+//App -> Post -> [PostDetail, Comment, NewAndEditPostForm]   <--- great heirarchy doc string! 
 
 function Post() {
   const [editForm, setEditForm] = useState(false);

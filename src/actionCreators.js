@@ -1,5 +1,8 @@
 import {ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT} from "./actionTypes";
 
+//TODO: define payload in these actions
+//example of a data structure is very helpful to the reader
+
 export function addPost(postId, payload){
   return {
     type: ADD_POST,

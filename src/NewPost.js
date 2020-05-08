@@ -1,24 +1,19 @@
 import React from "react";
 import NewAndEditPostForm from "./NewAndEditPostForm";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { addPost } from "./actionCreators";
 
 
 
-function NewPost(){
+function NewPost() {
 
-const dispatch = useDispatch()
-  
-//get the add_post and remove_post functions into here in order to pass them to
+  const dispatch = useDispatch()
 
-function addPostToStore(postId,data){
-  dispatch(addPost(postId,data))
-}
+  //get the add_post and remove_post functions into here in order to pass them to
 
-// function editPostInStore(postId,data){
-//   dispatch(editPost(postId,data))
-// }
-
+  function addPostToStore(postId, data) {
+    dispatch(addPost(postId, data))
+  }
 
 
   return (

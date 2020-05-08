@@ -19,10 +19,7 @@ function CommentForm({ addComment, postId }) {
     //reset form data to blank form
     setCommentFormData(BLANK_FORM);
 
-
   }
-
-
 
   function handleChange(evt) {
     setCommentFormData({ text: evt.target.value });
