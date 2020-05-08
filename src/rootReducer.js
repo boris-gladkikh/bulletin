@@ -1,21 +1,24 @@
-import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_POSTS } from "./actionTypes";
-import updateApiDataSimplePosts from "./helpers"
+import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_DETAIL_POST, LOAD_POSTS } from "./actionTypes";
+import {updateApiDataSimplePosts, updateApiDataDetailPosts} from "./helpers"
 
-//API Data Structure
-// [
-//   {
-//     "id": 1,
+// post detail structure from API
+// {
+//   "id": 1,
 //     "title": "First Post",
-//     "description": "Best post ever!",
-//     "votes": 0
-//   },
-//   {
-//     "id": 2,
-//     "title": "Second Post",
-//     "description": "A very good post!",
-//     "votes": 0
-//   }
-// ]
+//       "description": "Best post ever!",
+//         "body": "Everyone loves posting first. I win!",
+//           "votes": 0,
+//             "comments": [
+//               {
+//                 "id": 1,
+//                 "text": "This is a really great post."
+//               },
+//               {
+//                 "id": 2,
+//                 "text": "I learned so much reading this."
+//               }
+//             ]
+// }
 
 
 //data structure of store:
@@ -33,7 +36,7 @@ import updateApiDataSimplePosts from "./helpers"
 
 const INITIAL_STATE = {
   simplePosts: {},
-  posts: { "one": { title: "test", description: "test descrp", body: " booooooody" } },
+  posts: {},
   comments: {}
 
 }
@@ -79,6 +82,16 @@ function rootReducer(state = INITIAL_STATE, action) {
         simplePosts: {...state.simplePosts, ...posts}
       })
     }
+
+    case LOAD_DETAIL_POST: {
+      let post = updateApiDataDetailPosts(action.post);
+      return ({
+        ...state,
+        posts:{...state.posts, ...post}
+      })
+    }
+
+    
 
     /** Post comments section */
     case ADD_COMMENT: {

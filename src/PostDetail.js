@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 
 /**
@@ -6,6 +6,7 @@ import React from "react";
  */
 
 function PostDetail({ post }) {
+
   return (
     <div>
       <h1>{post.title}</h1>

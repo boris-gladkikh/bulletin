@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import NewAndEditPostForm from "./NewAndEditPostForm";
 import Comment from "./Comment";
@@ -6,6 +6,7 @@ import CommentForm from "./CommentForm";
 import PostDetail from "./PostDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { removePost, editPost, addComment, deleteComment } from "./actionCreators";
+import { getPostDetailFromAPI } from "./actionCreators";
 
 
 //renders parent 'Post' which has the comment children components as well as the edit form component
@@ -16,13 +17,22 @@ function Post() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  let { postId } = useParams();
-  const post = useSelector(st => st.posts[postId]);
+  //VARS FOR NOW DON'T BE MAD
+  var { postId } = useParams();
+  var post = useSelector(st => st.posts[postId]);
   const comments = useSelector(st => st.comments[postId]) || [];
 
 
-  console.log("post component- post", post);
-  console.log("post component-postId", postId);
+  //thunk API call to backend to retrieve post detail
+  useEffect(function fetchPostDetail(postId, post) {
+    console.log("this is postId inside post inside useEffect \n\n", postId)
+    if (post === undefined && postId !== undefined) {
+      dispatch(getPostDetailFromAPI(postId))
+    }
+  }, [dispatch, postId])
+
+    console.log("this is postId inside post outside useEffect \n\n", postId)
+
 
   //function to toggle visibility of edit form on button click
   function showEditForm() {
@@ -55,6 +65,7 @@ function Post() {
     dispatch(deleteComment(postId, commentId))
   }
 
+
   //ternary operator - if there are comments in state.comments, render comment components with necessary info.
   //otherwise render a 'no comments yet' paragraph
   let displayComments = (comments.length !== 0)
@@ -69,23 +80,34 @@ function Post() {
       </ul>))
     : <p>No Comments Yet</p>
 
-  return (
-    <div>
-      <PostDetail post={post} />
-      <button onClick={showEditForm}>Edit Post</button>
-      <button onClick={() => deletePostFromStore(postId)}>Delete Post</button>
-      {editForm === true ? <NewAndEditPostForm
-        editPost={editPostInStore}
-        editId={postId}
-        post={post}
+  if (post === undefined) {
+    return (
+      <div>
+        <h3>Loading...</h3>
+      </div>
+    )
 
-      /> : ""}
+  } else {
+    console.log("this is post inside else statemtn in POST", post)
 
-      <h4>Comments</h4>
-      {displayComments}
-      <CommentForm postId={postId} addComment={addCommentToStore} deleteComment={deleteCommentFromStore} />
-    </div>
-  )
+    return (
+      <div>
+        <PostDetail post={post} />
+        <button onClick={showEditForm}>Edit Post</button>
+        <button onClick={() => deletePostFromStore(postId)}>Delete Post</button>
+        {editForm === true ? <NewAndEditPostForm
+          editPost={editPostInStore}
+          editId={postId}
+          post={post}
+
+        /> : ""}
+
+        <h4>Comments</h4>
+        {displayComments}
+        <CommentForm postId={postId} addComment={addCommentToStore} deleteComment={deleteCommentFromStore} />
+      </div>
+    )
+  }
 }
 
 export default Post

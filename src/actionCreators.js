@@ -6,6 +6,7 @@ import {
   ADD_COMMENT,
   DELETE_COMMENT,
   LOAD_POSTS,
+  LOAD_DETAIL_POST,
   SHOW_SPINNER,
   SHOW_ERROR
 } from "./actionTypes";
@@ -67,6 +68,13 @@ export function gotPosts(posts) {
   }
 }
 
+export function gotDetailPost(post) {
+  return {
+    type: LOAD_DETAIL_POST,
+    post
+  }
+}
+
 export function startLoad() {
   return {
     type: SHOW_SPINNER
@@ -90,7 +98,6 @@ export function getSimplePostsFromAPI() {
 
     try {
       let res = await axios.get(`${BASE_URL}/api/posts/`);
-      console.log("res in try", res);
       dispatch(gotPosts(res.data));
     }
 
@@ -100,3 +107,19 @@ export function getSimplePostsFromAPI() {
     }
   }
 }
+
+export function getPostDetailFromAPI(postId){
+  return async function(dispatch) {
+    dispatch(startLoad());
+    try {
+      let res = await axios.get(`${BASE_URL}/api/posts/${postId}`);
+      console.log("detail res in try", res);
+
+      dispatch(gotDetailPost(res.data))
+    }
+    catch(err){
+      console.log("err in catch", err);
+      dispatch(showError(err));
+    }
+  }
+} 

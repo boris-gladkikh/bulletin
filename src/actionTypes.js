@@ -7,3 +7,4 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const LOAD_POSTS = "LOAD_POSTS";
 export const SHOW_SPINNER = "SHOW_SPINNER";
 export const SHOW_ERROR = "SHOW_ERROR";
+export const LOAD_DETAIL_POST = "LOAD_DETAIL_POST"
