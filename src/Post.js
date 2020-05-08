@@ -21,13 +21,12 @@ function Post() {
   let post = useSelector(st => st.posts[postId]);
   const comments = useSelector(st => st.comments[postId]) || [];
 
-  console.log("this is post inside post outside useEffect \n\n", post)
+  console.log("post var in post component", post)
 
   //thunk API call to backend to retrieve post detail
   useEffect(function fetchPostDetail() {
     if (post === undefined && postId !== undefined) {
       dispatch(getPostDetailFromAPI(postId))
-      console.log("this is post inside post inside useEffect after dispatch \n\n", post)
     }
   }, [dispatch, postId, post])
 

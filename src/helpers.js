@@ -10,7 +10,7 @@ export function updateApiDataSimplePosts(dataArray) {
 
 export function updateApiDataDetailPosts(responseObject) {
   let { id, title, description, votes, comments, body } = responseObject;
-  let dataObject = { id: { postId:id, title, description, votes, comments, body } };
+  let dataObject = { [id]: { postId:id, title, description, votes, comments, body } };
   return dataObject;
 }
 
