@@ -1,11 +1,39 @@
 import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
 
 
+//API Data Structure
+// [
+//   {
+//     "id": 1,
+//     "title": "First Post",
+//     "description": "Best post ever!",
+//     "votes": 0
+//   },
+//   {
+//     "id": 2,
+//     "title": "Second Post",
+//     "description": "A very good post!",
+//     "votes": 0
+//   }
+// ]
+
+
 //data structure of store:
 // post:
 // {postId: {title: "", description:"", body""}}
 // comments:
 //  {postId: [{commentId: commentId, text: text}]}
+
+
+const updatedDataStructure = posts.map(p => (
+  {
+    ...state,
+    posts: {...state.posts, {p.id: {p.id, p.title, p.description, p.votes}}}
+  }
+))
+
+
+
 
 
 const INITIAL_STATE = {

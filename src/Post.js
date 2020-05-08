@@ -9,7 +9,7 @@ import { removePost, editPost, addComment, deleteComment } from "./actionCreator
 
 
 //renders parent 'Post' which has the comment children components as well as the edit form component
-//App -> Post -> [PostDetail, Comment, NewAndEditPostForm]   <--- great heirarchy doc string! 
+//App -> Post -> [PostDetail, Comment, NewAndEditPostForm]   <--- great heirarchy doc string!
 
 function Post() {
   const [editForm, setEditForm] = useState(false);
@@ -21,7 +21,8 @@ function Post() {
   const comments = useSelector(st => st.comments[postId]) || [];
 
 
-
+  console.log("post component- post", post);
+  console.log("post component-postId", postId);
 
   //function to toggle visibility of edit form on button click
   function showEditForm() {
@@ -54,7 +55,7 @@ function Post() {
     dispatch(deleteComment(postId, commentId))
   }
 
-  //ternary operator - if there are comments in state.comments, render comment components with necessary info. 
+  //ternary operator - if there are comments in state.comments, render comment components with necessary info.
   //otherwise render a 'no comments yet' paragraph
   let displayComments = (comments.length !== 0)
     ? comments.map(c => (

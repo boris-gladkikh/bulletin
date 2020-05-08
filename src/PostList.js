@@ -16,11 +16,11 @@ import {useSelector, shallowEqual} from "react-redux";
 function PostList() {
 
 
-  //since it is a nested object data structure, how do we compare equality on the nested objects? 
-  
-  const posts =Object.values(useSelector((st)=> st.posts, shallowEqual));
-  let postIds = Object.keys(posts)
+  //since it is a nested object data structure, how do we compare equality on the nested objects?
 
+  // const posts =Object.values(useSelector((st)=> st.posts, shallowEqual));
+  const posts = (useSelector((st)=> st.posts, shallowEqual))
+  let postIds = Object.keys(posts);
 
   if(postIds.length === 0){
     return (
@@ -29,14 +29,14 @@ function PostList() {
       </div>
     )
   } else {
-    
+
 
   return (
     <div>
     {/* {posts.map(({title,description,postId})=>(
       <PostCard title={title} description={description} id={postId} key={postId} />
     ))} */}
-    {posts.map((p,idx)=>(
+    {Object.values(posts).map((p,idx)=>(
       <PostCard title={p.title} description={p.description} id={postIds[idx]} key={postIds[idx]} />
     ))}
 
