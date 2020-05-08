@@ -1,5 +1,5 @@
-import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
-
+import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_POSTS } from "./actionTypes";
+import updateApiDataSimplePosts from "./helpers"
 
 //API Data Structure
 // [
@@ -19,24 +19,20 @@ import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT } from ".
 
 
 //data structure of store:
-// post:
-// {postId: {title: "", description:"", body""}}
+// simplePosts:
+// {postId: {postId: "", title: "", description:"", votes: ""}}
+// posts:
+// {postId: {postId: "", title: "", description:"", votes: "", body""}}
 // comments:
 //  {postId: [{commentId: commentId, text: text}]}
 
-
-const updatedDataStructure = posts.map(p => (
-  {
-    ...state,
-    posts: {...state.posts, {p.id: {p.id, p.title, p.description, p.votes}}}
-  }
-))
 
 
 
 
 
 const INITIAL_STATE = {
+  simplePosts: {},
   posts: { "one": { title: "test", description: "test descrp", body: " booooooody" } },
   comments: {}
 
@@ -75,7 +71,16 @@ function rootReducer(state = INITIAL_STATE, action) {
 
     }
 
+    case LOAD_POSTS: {
+      let posts = updateApiDataSimplePosts(action.posts);
 
+      return ({
+        ...state,
+        simplePosts: {...state.simplePosts, ...posts}
+      })
+    }
+
+    /** Post comments section */
     case ADD_COMMENT: {
 
       let commentsCopy = { ...state.comments };

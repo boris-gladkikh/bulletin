@@ -1,28 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostCard from "./PostCard";
-import {useSelector, shallowEqual} from "react-redux";
-
-
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { getSimplePostsFromAPI } from "./actionCreators";
 
 //data structure of store:
-// post:
-// {postId: {postId:"", title: "", description:"", body""}} <--------- TODO: include ID in reducer state value as well
+// simplePosts:
+// {postId: {postId: "", title: "", description:"", votes: ""}}
+// posts:
+// {postId: {postId: "", title: "", description:"", votes: "", body""}}
 // comments:
 //  {postId: [{commentId: commentId, text: text}]}
-
 
 //renders list of all available posts with post card child components
 
 function PostList() {
-
-
   //since it is a nested object data structure, how do we compare equality on the nested objects?
+  const postIdTosimplePosts = (useSelector((st) => st.simplePosts, shallowEqual))
+  const simplePosts = Object.values(postIdTosimplePosts);
+  let postIds = Object.keys(postIdTosimplePosts);
+  const dispatch = useDispatch();
 
-  // const posts =Object.values(useSelector((st)=> st.posts, shallowEqual));
-  const posts = (useSelector((st)=> st.posts, shallowEqual))
-  let postIds = Object.keys(posts);
+  // request simple posts from backendAPI and load into store state.simplePOsts
+  useEffect(function fetchSimplePosts() {
+    dispatch(getSimplePostsFromAPI())
+  }, [dispatch]);
 
-  if(postIds.length === 0){
+  if (postIds.length === 0) {
     return (
       <div>
         No posts yet...
@@ -30,20 +33,15 @@ function PostList() {
     )
   } else {
 
+    return (
+      <div>
+        {simplePosts.map(({ title, description, postId }) => (
+          <PostCard title={title} description={description} id={postId} key={postId} />
+        ))}
 
-  return (
-    <div>
-    {/* {posts.map(({title,description,postId})=>(
-      <PostCard title={title} description={description} id={postId} key={postId} />
-    ))} */}
-    {Object.values(posts).map((p,idx)=>(
-      <PostCard title={p.title} description={p.description} id={postIds[idx]} key={postIds[idx]} />
-    ))}
-
-    </div>
-  );
-}
+      </div>
+    );
+  }
 }
 
 export default PostList;
-

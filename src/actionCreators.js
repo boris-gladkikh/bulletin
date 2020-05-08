@@ -10,8 +10,7 @@ import {
   SHOW_ERROR
 } from "./actionTypes";
 
-
-const BASE_URL_POSTS = "/api/posts/";
+const BASE_URL = "http://localhost:5000"
 
 //TODO: define payload in these actions AND OTHER
 //example of a data structure is very helpful to the reader
@@ -82,17 +81,22 @@ export function showError(msg) {
 }
 
 /** Action creators returning thunk action */
+
+//QUESTION: HOW DO WE DRILL DOWN TO ERROR MESSAGES?
+
 export function getSimplePostsFromAPI() {
-  return async function (dispatch) {
+  return async function(dispatch) {
     dispatch(startLoad());
 
     try {
-      let res = await axios.get(BASE_URL_POSTS);
-      dispatch(gotPosts(res.data.posts));
+      let res = await axios.get(`${BASE_URL}/api/posts/`);
+      console.log("res in try", res);
+      dispatch(gotPosts(res.data));
     }
 
     catch(err) {
-      dispatch(showError(err.response.data))
+      console.log("err in catch", err);
+      dispatch(showError(err))
     }
   }
 }
