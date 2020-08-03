@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import './NewAndEditPostForm.css';
 
 /**
  * Renders a form for user to add new post or edit existing post.
@@ -14,17 +17,14 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
   const [postFormData, setPostFormData] = useState(prefillForm);
   const history = useHistory();
 
-//determines wether we are adding or editing a post, then executes appropriate function based on existence of edit data.
+  //determines wether we are adding or editing a post, then executes appropriate function based on existence of edit data.
 
-  function onSubmit(evt) {
+  function handleSubmit(evt) {
     evt.preventDefault();
     var newId = uuidv4();
- 
-    if (editId !== undefined) {
-      console.log("this is our action.postId in our edit Form", editId)
 
+    if (editId !== undefined) {
       editPost(editId, postFormData);
-      
     } else {
       addPost(newId, postFormData);
     }
@@ -51,9 +51,61 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
 
 
   return (
-    <div>
+        <Form className="mx-5" onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Label></Form.Label><br />
+            <Form.Control
+              id="title"
+              size="lg"
+              name="title"
+              type="text"
+              value={title}
+              placeholder="Title"
+              onChange={onChange}
+              required
+            />
+          </Form.Group>
 
-      <form onSubmit={onSubmit}>
+          <Form.Group>
+            <Form.Label></Form.Label><br />
+            <Form.Control
+              id="description"
+              name="description"
+              size="lg"
+              type="text"
+              value={description}
+              placeholder="Description"
+              onChange={onChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label></Form.Label><br />
+            <Form.Control
+              id="body"
+              name="body"
+              value={body}
+              size="lg"
+              placeholder="Be Descriptive!"
+              onChange={onChange}
+              as="textarea"
+              rows="3"
+              required
+            />
+
+          </Form.Group>
+          <Button type="submit" className="ml-2" id="save">Save</Button>
+          <Button
+            className="ml-2"
+            type="button"
+            onClick={redirectUpdateHistory}
+            id="cancel">
+            Cancel</Button>
+
+        </Form>
+
+        /* <form onSubmit={onSubmit}>
         <label htmlFor="title"></label>
         <input
           id="title"
@@ -88,8 +140,7 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
           onClick={redirectUpdateHistory}
           id="cancel">
           Cancel</button>
-      </form>
-    </div>
+      </form> */
   );
 }
 

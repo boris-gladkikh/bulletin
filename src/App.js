@@ -5,7 +5,8 @@ import Navigation from "./Navigation";
 import PostList from "./PostList";
 import Home from "./Home";
 import NewPost from "./NewPost";
-import Post from "./Post"
+import Post from "./Post";
+
 
 
 

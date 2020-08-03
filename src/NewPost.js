@@ -16,7 +16,7 @@ function NewPost() {
 
   return (
     <div>
-      <h1>Add A New Post!</h1>
+      <h1 className="mt-3">Add A New Post!</h1>
       <NewAndEditPostForm addPost={addPostToStore} />
     </div>
   )

@@ -1,28 +1,26 @@
-.App {
-  text-align: center;
-}
+
 
 *{
   font-family: 'Ropa Sans', sans-serif;
 }
 
+
 body {
   margin-top: 5px;
   margin-bottom: 20px;
   text-align: center;
-  background-color: #112141;
+  background-color: #112141 !important;
   color:white;
 
 }
 
 a {
-  color: blueviolet
+  color: rgb(143, 140, 145);
+  text-decoration: none;
 }
 
 a:hover {
   color: tomato;
+  opacity: .75;
 }
 
-.ropa {
-  font-family: 'Ropa Sans', sans-serif;
-}

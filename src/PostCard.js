@@ -6,13 +6,13 @@ import "./PostCard.css"
 
 function PostCard({ title, description, id }) {
   return (
+    <Link to={`/posts/${id}`}>
       <div className="postCard">
-        <Link to={`/posts/${id}`}>
-          <h3> {title}</h3>
-        </Link>
+        <h2> {title}</h2>
         <p>{description}</p>
       </div>
-  
+    </Link>
+
 
 
   );
