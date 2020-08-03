@@ -1,0 +1,6 @@
+.postContainer {
+  display:flex;
+  flex-direction: column;
+  width: 100 vw;
+  align-items: center;
+}

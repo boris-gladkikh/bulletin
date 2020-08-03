@@ -9,8 +9,6 @@ function NewPost() {
 
   const dispatch = useDispatch()
 
-  //get the add_post and remove_post functions into here in order to pass them to
-
   function addPostToStore(postId, data) {
     dispatch(addPost(postId, data))
   }

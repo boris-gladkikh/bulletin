@@ -44,6 +44,7 @@ const INITIAL_STATE = {
 function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ADD_POST: {
+      console.log("this is new post", action.payload)
       return ({
         ...state,
         posts: {

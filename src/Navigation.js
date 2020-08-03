@@ -10,10 +10,11 @@ function Navigation() {
 
   return(
     <nav>
-      <h1>MicroBlog</h1>
-      <h6>Innovative One Of A Kind Blog Application</h6>
-      <NavLink to="/">Blog</NavLink>
-      <NavLink exact to="/new">Add a New Post</NavLink>
+      <div className="title">BULLETIN</div>
+      <h2>SHARE YOUR THOUGHTS WITH YOUR PEERS!
+      </h2>
+      <NavLink to="/">HOME</NavLink>
+      <NavLink exact to="/new">ADD POST</NavLink>
     </nav>
   )
 }

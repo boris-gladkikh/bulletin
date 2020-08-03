@@ -20,7 +20,6 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
     evt.preventDefault();
     var newId = uuidv4();
  
-
     if (editId !== undefined) {
       console.log("this is our action.postId in our edit Form", editId)
 

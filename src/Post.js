@@ -21,7 +21,6 @@ function Post() {
   let post = useSelector(st => st.posts[postId]);
   const comments = useSelector(st => st.comments[postId]) || [];
 
-  console.log("post var in post component", post)
 
   //thunk API call to backend to retrieve post detail
   useEffect(function fetchPostDetail() {

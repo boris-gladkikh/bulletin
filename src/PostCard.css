@@ -1,6 +1,9 @@
 .postCard {
   border: 1px solid black;
-  width: 40%;
-  margin-left: 30%;
-  margin-bottom: 10px;
+  width: 70vw;
+  margin-bottom: 20px;
+  background-color: white;
+  color: #112141;
+  
 }
+

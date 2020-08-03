@@ -1,16 +1,32 @@
 nav {
-  background-color: #cce6ff;
+  background-color: #5DC7A1;
   text-align: left;
-  padding: 5%;
+  padding: 20px;
+  color: #112141;
+  font-family: 'Ropa Sans', sans-serif;
+  width: 100vw;
+  margin: 0;
+
 }
 
 nav a {
   text-decoration: none;
-  padding-left: 1%;
-  padding-right: 1%;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  font-size: 24px;
 }
 
 nav a:hover {
   text-decoration: none;
-  color: #ff5c33;
+  color:darkblue;
+}
+
+.title {
+  font-size: 100px;
+  padding: 0px;
+}
+
+nav h2{
+  font-size: 30px;
 }

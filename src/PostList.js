@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PostCard from "./PostCard";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { getSimplePostsFromAPI } from "./actionCreators";
+import './Postlist.css';
 
 //data structure of store:
 // simplePosts:
@@ -34,7 +35,7 @@ function PostList() {
   } else {
 
     return (
-      <div>
+      <div className="postContainer">
         {simplePosts.map(({ title, description, postId }) => (
           <PostCard title={title} description={description} id={postId} key={postId} />
         ))}

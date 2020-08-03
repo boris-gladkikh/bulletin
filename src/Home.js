@@ -8,7 +8,7 @@ import PostList from "./PostList";
 function Home() {
   return (
     <div>
-      <h2>Welcome to MicroBlog!</h2>
+      <h2>Latest Posts:</h2>
       <PostList />
     </div>
   );
