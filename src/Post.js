@@ -3,10 +3,13 @@ import { useParams, useHistory } from "react-router-dom";
 import NewAndEditPostForm from "./NewAndEditPostForm";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
-import PostDetail from "./PostDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { removePost, editPost, addComment, deleteComment } from "./actionCreators";
 import { getPostDetailFromAPI } from "./actionCreators";
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Accordion from 'react-bootstrap/Accordion';
+
 
 
 //renders parent 'Post' which has the comment children components as well as the edit form component
@@ -33,7 +36,7 @@ function Post() {
 
   //function to toggle visibility of edit form on button click
   function showEditForm() {
-    setEditForm(true);
+    setEditForm(!editForm);
   }
 
 
@@ -87,10 +90,34 @@ function Post() {
   } else {
 
     return (
-      <div>
-        <PostDetail post={post} />
-        <button onClick={showEditForm}>Edit Post</button>
-        <button onClick={() => deletePostFromStore(postId)}>Delete Post</button>
+      <div className="mt-5">
+        <Accordion>
+          <Card className="w-75 m-auto p-1 text-dark">
+            <Card.Header className="text-alert">
+              <h2 style={{ color: "black" }}>{post.title}</h2>
+            </Card.Header>
+            <Card.Body>
+              <h3  >{post.description}</h3>
+              <hr></hr>
+              <p >{post.body}</p>
+            </Card.Body>
+            <Card.Footer className="d-flex flex-row justify-content-between">
+              <div>
+                <Button size="sm" className="mr-2" onClick={showEditForm}>Edit Post</Button>
+                <Button size="sm" onClick={() => deletePostFromStore(postId)}>Delete Post</Button>
+              </div>
+              <div>
+                {comments.length} Comments
+              <Button size="sm" className="ml-2">Add Comment</Button>
+              </div>
+            </Card.Footer>
+            {displayComments}
+            <CommentForm postId={postId} addComment={addCommentToStore} deleteComment={deleteCommentFromStore} />
+          </Card>
+
+        </Accordion>
+
+
         {editForm === true ? <NewAndEditPostForm
           editPost={editPostInStore}
           editId={postId}
@@ -98,9 +125,6 @@ function Post() {
 
         /> : ""}
 
-        <h4>Comments</h4>
-        {displayComments}
-        <CommentForm postId={postId} addComment={addCommentToStore} deleteComment={deleteCommentFromStore} />
       </div>
     )
   }

@@ -26,6 +26,7 @@ function CommentForm({ addComment, postId }) {
   }
 
   return (
+
     <div>
       <h6>Add A Comment!</h6>
       <form onSubmit={handleSubmit}>

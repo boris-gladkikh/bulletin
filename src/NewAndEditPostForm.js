@@ -51,7 +51,8 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
 
 
   return (
-        <Form className="mx-5" onSubmit={handleSubmit}>
+
+        <Form className="m-auto w-75" float="center" onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label></Form.Label><br />
             <Form.Control
@@ -104,7 +105,6 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
             Cancel</Button>
 
         </Form>
-
         /* <form onSubmit={onSubmit}>
         <label htmlFor="title"></label>
         <input
