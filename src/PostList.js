@@ -35,7 +35,7 @@ function PostList() {
   } else {
 
     return (
-      <div className="postContainer">
+      <div className="postContainer mt-5">
         {simplePosts.map(({ title, description, postId }) => (
           <PostCard title={title} description={description} id={postId} key={postId} />
         ))}

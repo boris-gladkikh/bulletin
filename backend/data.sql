@@ -9,11 +9,11 @@ CREATE TABLE posts (id SERIAL PRIMARY KEY,
                     description TEXT NOT NULL,
                     body TEXT, 
                     votes INT NOT NULL DEFAULT 0,
-                    datePosted DATE DEFAULT Date());
+                    datePosted DATETIME DEFAULT NOW());
                     
 CREATE TABLE comments (id SERIAL PRIMARY KEY, 
                        text TEXT NOT NULL,
-                       datePosted DATE DEFAULT Date(), 
+                       datePosted DATETIME DEFAULT NOW(), 
                        post_id INT NOT NULL REFERENCES posts ON DELETE CASCADE);
 
 INSERT INTO posts (title, description, body) VALUES

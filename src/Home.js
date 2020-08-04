@@ -7,7 +7,7 @@ import PostList from "./PostList";
 
 function Home() {
   return (
-    <div>
+    <div className="mt-5">
       <h2>Latest Posts:</h2>
       <PostList />
     </div>

@@ -107,12 +107,24 @@ function Post() {
                 <Button size="sm" onClick={() => deletePostFromStore(postId)}>Delete Post</Button>
               </div>
               <div>
-                {comments.length} Comments
-              <Button size="sm" className="ml-2">Add Comment</Button>
+                <Accordion.Toggle size="sm" className=" mr-2 btn-primary text-white" as={Button} variant="link" eventKey="0">
+                  {comments.length} Comments
+                </Accordion.Toggle>
+                <Accordion.Toggle size="sm" className="btn-primary text-white" as={Button} variant="link" eventKey="1">
+                  Add Comment
+                </Accordion.Toggle>
+
               </div>
             </Card.Footer>
-            {displayComments}
+            <Accordion.Collapse eventKey="0">
+              <div>
+              {displayComments}
+
+              </div>
+            </Accordion.Collapse>
+            <Accordion.Collapse eventKey="1">
             <CommentForm postId={postId} addComment={addCommentToStore} deleteComment={deleteCommentFromStore} />
+            </Accordion.Collapse>
           </Card>
 
         </Accordion>
