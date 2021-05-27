@@ -22,6 +22,7 @@ function Post() {
 
   const { postId } = useParams();
   let post = useSelector(st => st.posts[postId]);
+  let store = useSelector(st => st);
   const comments = useSelector(st => st.comments[postId]) || [];
 
 
@@ -30,7 +31,7 @@ function Post() {
     if (post === undefined && postId !== undefined) {
       dispatch(getPostDetailFromAPI(postId))
     }
-  }, [dispatch, postId, post])
+  }, [dispatch, postId, post, store])
 
 
 

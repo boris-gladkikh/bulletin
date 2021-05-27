@@ -105,42 +105,6 @@ function NewAndEditPostForm({ addPost, editPost, editId, post }) {
             Cancel</Button>
 
         </Form>
-        /* <form onSubmit={onSubmit}>
-        <label htmlFor="title"></label>
-        <input
-          id="title"
-          name="title"
-          type="text"
-          value={title}
-          placeholder="title"
-          onChange={onChange}>
-        </input><br />
-
-        <label htmlFor="description"></label>
-        <input
-          id="description"
-          name="description"
-          type="text"
-          value={description}
-          placeholder="description"
-          onChange={onChange}>
-        </input><br />
-
-        <label htmlFor="body"></label>
-        <textarea
-          id="body"
-          name="body"
-          value={body}
-          placeholder="body"
-          onChange={onChange}>
-        </textarea><br />
-        <button id="save">Save</button>
-        <button
-          type="button"
-          onClick={redirectUpdateHistory}
-          id="cancel">
-          Cancel</button>
-      </form> */
   );
 }
 

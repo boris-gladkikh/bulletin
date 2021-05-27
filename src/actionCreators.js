@@ -123,3 +123,45 @@ export function getPostDetailFromAPI(postId){
     }
   }
 } 
+
+export function postNewPostToApi(payload){
+  return async function(dispatch){
+    dispatch(startLoad());
+    try{
+      let res = await axios.post(`${BASE_URL}/api/posts/`, payload);
+      dispatch(gotDetailPost(res.data));
+    }
+    catch(err){
+      console.log("err in catch", err);
+      dispatch(showError(err));
+    }
+  }
+}
+
+export  function updatePostInApi(postId, payload){
+  return async function(dispatch){
+    dispatch(startLoad());
+    try{
+      let res = await axios.put(`${BASE_URL}/api/posts/${postId}`, payload);
+      dispatch(gotDetailPost(res.data));
+    }
+    catch(err){
+      console.log("err in catch", err);
+      dispatch(showError(err));
+    }
+  }
+}
+export function deletePosttFromApi(postId){
+  return async function(dispatch){
+    dispatch(startLoad());
+    try{
+      let res = await axios.delete(`${BASE_URL}/api/posts/${postId}`);
+      dispatch(gotDetailPost(res.data));
+    }
+    catch(err){
+      console.log("err in catch", err);
+      dispatch(showError(err));
+    }
+
+  }
+}

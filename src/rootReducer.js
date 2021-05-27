@@ -50,6 +50,15 @@ function rootReducer(state = INITIAL_STATE, action) {
         posts: {
           ...state.posts,
           [action.postId]: { ...action.payload }
+        },
+        simplePosts: {
+          ...state.simplePosts,
+          [action.postId]: {
+            postId: action.postId,
+            title:  action.title,
+            description: action.description,
+            votes:action.votes || 0, 
+         }
         }
       })
 
